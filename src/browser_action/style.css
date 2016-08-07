@@ -78,6 +78,7 @@ ul {
 #friend {
   widows: 100%;
   height: 90px;
+  margin-bottom: -26px;
 }
 
 #friend .info {
@@ -147,7 +148,7 @@ ul {
 .options {
   border-top: 1px solid #ccc;
   position: absolute;
-  top: 360px;
+  top: 300px;
   width: 300px;
 }
 
