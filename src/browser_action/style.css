@@ -12,11 +12,13 @@ font-family: Montserrat;
 src: url("font/Montserrat-Regular.otf") format("opentype");
 }
 
+/*
 @font-face {
 font-family: GraublauWeb;
 font-weight: bold;
 src: url("font/Montserrat-Bold.otf") format("opentype");
 }
+*/
 
 a {
   color: white;
