@@ -2,8 +2,6 @@ const config = {
   host: 'twilio.public.mattburman.com'
 };
 
-chrome.storage.get
-
 
 chrome.extension.sendMessage({}, function(response) {
   var readyStateCheckInterval = setInterval(function() {
@@ -26,7 +24,7 @@ chrome.extension.sendMessage({}, function(response) {
 });
 
 function fetchAccessToken (cb) {
-    $.getJSON(host + '/token', { device: browser }, data => {
+    $.getJSON(host + '/token', { device: 'browser' }, data => {
       console.log(data.token);
       console.log(data.identity);
 
