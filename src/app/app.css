@@ -1,0 +1,170 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+
+body {
+font-family: 'Montserrat', sans-serif;
+background-color: #151718;
+color: white;
+font-size: 20px;
+padding: 0px;
+margin: 0px;
+}
+
+@font-face {
+font-family: Montserrat;
+src: url("font/Montserrat-Regular.otf") format("opentype");
+}
+
+@font-face {
+font-family: GraublauWeb;
+font-weight: bold;
+src: url("font/Montserrat-Bold.otf") format("opentype");
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+h2 {
+  font-size: 17px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+.left {
+  float:left;
+}
+
+.right {float:right;}
+
+.welcome {
+  text-align: center;
+}
+
+.window {
+  height: 450px;
+  width: 300px;
+  padding: 10px;
+  margin:0px;
+}
+
+.header {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.friends-list {
+  max-height: 25px;
+}
+
+#friend {
+  widows: 100%;
+  height: 90px;
+}
+
+#friend .info {
+  margin-left: 90px;
+  float: left:
+}
+
+#friend .info h3 {
+  margin-top: -13px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+#friend .online {
+  font-style: normal;
+  color: green;
+}
+
+#friend .offline {
+  font-style: normal;
+  color: red;
+}
+
+#friend img {
+  float: left;
+  width: 70px;
+  height: 70px;
+}
+
+.add-friend img {
+    width: 200px;
+}
+
+#field {
+  color: grey;
+}
+
+#selected {
+  color: grey;
+}
+
+.options {
+  border-top: 1px solid #ccc;
+  position: absolute;
+  top: 350px;
+  width: 300px;
+}
+
+.options li {
+  margin-bottom: 5px;
+}
+
+.options ul {
+  list-style: none;
+  margin-left: -20px;
+  margin-top: 8px;
+}
+
+.options img {
+  float: right;
+}
+
+.videoSharing {
+  float:right;
+}
+
+.settings img {
+  float: right;
+  width: 75px;
+  height: 75px;
+}

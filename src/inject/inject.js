@@ -13,7 +13,7 @@ chrome.extension.sendMessage({}, function(response) {
 		// This part of the script triggers when page is done loading
 		console.log("Hello. This message was sent from scripts/inject.js");
 		// ----------------------------------------------------------
-
+		console.log(chrome.extension.getURL('src/app/routes/main.html'));
 
 
 		// Editing the dom and manipulating the youtube
