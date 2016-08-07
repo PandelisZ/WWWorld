@@ -104,8 +104,8 @@ ul {
 }
 
 .add-friend img {
-    width: 280px;
-    margin: 15px;
+  width: 280px;
+  margin: 15px;
 }
 
 #field {
@@ -121,6 +121,7 @@ ul {
   position: absolute;
   top: 350px;
   width: 300px;
+  padding: 10px;
 }
 
 .options li {
