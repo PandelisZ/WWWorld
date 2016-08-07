@@ -104,8 +104,12 @@ ul {
 }
 
 .add-friend img {
-  width: 280px;
+  width: 290px;
   margin-top: 15px;
+}
+
+.add-friend #friend h2 {
+  margin-left: 60px;
 }
 
 #field {
@@ -114,6 +118,12 @@ ul {
 
 #selected {
   color: grey;
+}
+
+.about img {
+  margin-top: 15px;
+  width: 70px;
+  height: 70px;
 }
 
 .options {
