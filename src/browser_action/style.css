@@ -12,11 +12,13 @@ font-family: Montserrat;
 src: url("font/Montserrat-Regular.otf") format("opentype");
 }
 
+/*
 @font-face {
 font-family: GraublauWeb;
 font-weight: bold;
 src: url("font/Montserrat-Bold.otf") format("opentype");
 }
+*/
 
 a {
   color: white;
@@ -32,6 +34,10 @@ h2 {
 }
 
 h3 {
+  font-size: 14px;
+}
+
+ul {
   font-size: 14px;
 }
 
@@ -59,7 +65,7 @@ h3 {
 }
 
 .friends-list {
-  max-height: 25px;
+  height: 25px;
 }
 
 #friend {
@@ -128,7 +134,7 @@ h3 {
 }
 
 .videoSharing {
-  float:right;
+  float: right;
 }
 
 .settings img {
