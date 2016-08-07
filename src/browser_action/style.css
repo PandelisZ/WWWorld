@@ -39,6 +39,10 @@ ul {
   font-size: 14px;
 }
 
+#bigger {
+  font-size: 17px;
+}
+
 .left {
   float:left;
 }
