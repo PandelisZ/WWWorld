@@ -120,10 +120,19 @@ ul {
   color: grey;
 }
 
+#upload {
+  color: grey;
+}
+
 .about img {
+  margin: 0 auto;
   margin-top: 15px;
   width: 70px;
   height: 70px;
+}
+
+.about #made-by {
+  color: grey;
 }
 
 .options {
