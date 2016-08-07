@@ -39,6 +39,11 @@ ul {
   font-size: 14px;
 }
 
+#scroll {
+  position: absolute;
+  left: 302px;
+}
+
 #bigger {
   font-size: 22px;
 }
