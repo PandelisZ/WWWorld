@@ -2,7 +2,6 @@ const config = {
   host: '//twilio.mattburman.com'
 };
 
-
 chrome.extension.sendMessage({}, function(response) {
   var readyStateCheckInterval = setInterval(function() {
     if (document.readyState === "complete") {
@@ -16,6 +15,20 @@ chrome.extension.sendMessage({}, function(response) {
         client = new Twilio.Sync.Client(new Twilio.AccessManager(data.token));
 
         console.log("You are: " + client.accessManager.identity);
+
+        var but = $("<button>MMM</button>");
+
+        but.click(function() {
+          client.document('vid').then(function(doc) {
+            doc.mutate(function(data) {
+              data.master = client.accessManager.identity;
+
+              return data;
+            });
+          });
+        });
+
+        $('#eow-title').append(but);
 
         client.document("vid").then(function (doc) {
           doc.mutate(function(data) {
@@ -32,6 +45,7 @@ chrome.extension.sendMessage({}, function(response) {
           });
 
           doc.on("updated",function(data) {
+            console.log("Master is: " + data.master);
             if(data.master != client.accessManager.identity) {
               $('video')[0].currentTime = data.time;
             }
@@ -44,16 +58,6 @@ chrome.extension.sendMessage({}, function(response) {
               if(data.master == client.accessManager.identity) {
                 data.time = $('video')[0].currentTime;
               }
-
-              return data;
-            });
-          });
-        };
-
-        window.onbeforeunload = function (e) {
-          client.document('vid').then(function(doc) {
-            doc.mutate(function(data) {
-              data.master = null;
 
               return data;
             });
