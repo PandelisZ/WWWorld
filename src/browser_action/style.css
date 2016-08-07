@@ -112,8 +112,13 @@ ul {
   margin-top: 15px;
 }
 
+.add-friend #friend img {
+  margin-top: 0px;
+}
+
 .add-friend #friend h2 {
-  margin-left: 60px;
+  margin-left: 90px;
+  margin-top: 15px;
 }
 
 #field {
