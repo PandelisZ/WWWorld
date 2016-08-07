@@ -16,48 +16,22 @@ chrome.extension.sendMessage({}, function(response) {
 
         console.log("You are: " + client.accessManager.identity);
 
-        var but = $("<button>MMM</button>");
-
-        but.click(function() {
-          client.document('vid').then(function(doc) {
-            doc.mutate(function(data) {
-              data.master = client.accessManager.identity;
-
-              return data;
-            });
-          });
-        });
-
-        $('#eow-title').append(but);
-
         client.document("vid").then(function (doc) {
           doc.mutate(function(data) {
-            if(!data.master) {
-              data.master = client.accessManager.identity;
-              data.time = $('video')[0].currentTime;
-            } else {
-              $('video')[0].currentTime = data.time;
-            }
-
-            console.log("Master is: " + data.master);
+            $('video')[0].currentTime = data.time; //TODO: plus time since updated
 
             return data;
           });
 
           doc.on("updated",function(data) {
-            console.log("Master is: " + data.master);
-            if(data.master != client.accessManager.identity) {
-              $('video')[0].currentTime = data.time;
-            }
+            $('video')[0].currentTime = data.time;
           });
         });
 
         $('video')[0].onplay = function() {
           client.document('vid').then(function(doc) {
             doc.mutate(function(data) {
-              if(data.master == client.accessManager.identity) {
-                data.time = $('video')[0].currentTime;
-              }
+              data.time = $('video')[0].currentTime;
 
               return data;
             });
