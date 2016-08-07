@@ -1,5 +1,5 @@
 const config = {
-  host: 'twilio.mattburman.com'
+  host: 'twilio.public.mattburman.com'
 };
 
 chrome.storage.get
