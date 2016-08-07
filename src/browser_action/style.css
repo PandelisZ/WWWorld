@@ -63,7 +63,7 @@ ul {
 }
 
 .friends-list {
-  max-height: 25px;
+  height: 25px;
   overflow: scroll;
 }
 
