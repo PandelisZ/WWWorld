@@ -1,6 +1,11 @@
-const config = {
-  host: '//twilio.mattburman.com',
-};
+function Config(host, room) {
+  const self = this;
+
+  this.host = host || '';
+  this.room = room || '';
+  this.setRoom = room => self.room = room;
+}
+const config = new Config('//twilio.mattburman.com');
 
 chrome.extension.sendMessage({}, response => {
   const readyStateCheckInterval = setInterval(() => {
