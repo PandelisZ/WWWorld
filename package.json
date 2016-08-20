@@ -1,0 +1,26 @@
+{
+  "name": "youtubesync",
+  "version": "1.0.0",
+  "description": "Watch YouTube together.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PandelisZ/WWWorld.git"
+  },
+  "author": "Matt Burman",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/PandelisZ/WWWorld/issues"
+  },
+  "homepage": "https://github.com/PandelisZ/WWWorld#readme",
+  "devDependencies": {
+    "eslint": "^3.3.1",
+    "eslint-config-airbnb": "^10.0.1",
+    "eslint-plugin-import": "^1.13.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-react": "^6.1.2"
+  }
+}
