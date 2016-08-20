@@ -2,16 +2,15 @@ function Config(host, room) {
   const self = this;
 
   this.host = host || '';
-  this.room = room || '';
+  this.room = room || 'global';
   this.setRoom = room => self.room = room;
+  this.client = undefined;
 }
 const config = new Config('//twilio.mattburman.com');
 
 chrome.extension.sendMessage({}, response => {
   const readyStateCheckInterval = setInterval(() => {
     if (document.readyState === 'complete') {
-      let client;
-
       clearInterval(readyStateCheckInterval);
 
       $('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js\'>');
@@ -19,11 +18,11 @@ chrome.extension.sendMessage({}, response => {
       $('head').append('<style>.wwwatch-buttons{background-color:white; width: 100%; height: 80px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.1);}</style>');
 
       fetchAccessToken(authData => {
-        client = new Twilio.Sync.Client(new Twilio.AccessManager(authData.token));
+        config.client = new Twilio.Sync.Client(new Twilio.AccessManager(authData.token));
 
-        console.log('You are: ' + client.accessManager.identity);
+        console.log('You are: ' + config.client.accessManager.identity);
 
-        client.document('vid').then(doc => {
+        config.client.document('vid').then(doc => {
           doc.mutate(data => {
             $('video')[0].currentTime = data.time; // TODO: plus time since updated
             return data;
@@ -32,15 +31,15 @@ chrome.extension.sendMessage({}, response => {
           doc.on('updated', data => {
             $('video')[0].currentTime = data.time;
           });
-        });
+        }).catch(err => console.log('getDocumentERR: ', err));
 
         $('video')[0].onplay = () => {
-          client.document('vid').then(doc => {
+          config.client.document(config.room).then(doc => {
             doc.mutate(data => {
               data.time = $('video')[0].currentTime;
               return data;
             });
-          });
+          }).catch(err => console.log('onPlayERR: ', err));
         };
       });
 
