@@ -1,190 +1,136 @@
-body {
-font-family: 'Montserrat', sans-serif;
-background-color: #151718;
-color: white;
-/*font-size: 20px;*/
-padding: 0px;
-margin: 0px;
-}
-
-@font-face {
-font-family: Montserrat;
-src: url("font/Montserrat-Regular.otf") format("opentype");
-}
-
-@font-face {
-font-family: GraublauWeb;
-font-weight: bold;
-src: url("font/Montserrat-Bold.otf") format("opentype");
-}
-
-a {
-  color: white;
-  text-decoration: none;
+html {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 h1 {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 h2 {
-  font-size: 17px;
-}
-
-h3 {
-  font-size: 14px;
-}
-
-ul {
-  font-size: 14px;
-}
-
-#scroll {
-  position: absolute;
-  left: 302px;
-}
-
-#bigger {
   font-size: 22px;
 }
 
-.left {
-  float:left;
-}
-
-.right {float:right;}
-
-.welcome {
-  text-align: center;
-}
-
 .window {
-  height: 450px;
-  width: 300px;
-  padding: 10px;
+  background-color: #2c3e50;
   margin: 0px;
+  width: 280px;
 }
 
 .header {
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px solid #cccccc;
-  padding-left: 5px;
-}
-
-.header h2 {
-  padding-left: 10px;
-}
-
-.friends-list {
-  height: 25px;
-}
-
-#friend {
-  widows: 100%;
-  height: 90px;
-  margin-bottom: -26px;
-}
-
-#friend .info {
-  margin-left: 90px;
-  float: left:
-}
-
-#friend .info h3 {
-  margin-top: -13px;
-  font-weight: normal;
-  font-style: italic;
-}
-
-#friend .online {
-  font-style: normal;
-  color: green;
-}
-
-#friend .offline {
-  font-style: normal;
-  color: red;
-}
-
-#friend img {
-  float: left;
-  width: 70px;
-  height: 70px;
-}
-
-.add-friend img {
-  width: 290px;
-  margin-top: 15px;
-}
-
-.add-friend #friend img {
+  background: #2c3e50;
+  background-image: -webkit-linear-gradient(top, #2c3e50, #34495e);
+  background-image: -moz-linear-gradient(top, #2c3e50, #34495e);
+  background-image: -ms-linear-gradient(top, #2c3e50, #34495e);
+  background-image: -o-linear-gradient(top, #2c3e50, #34495e);
+  background-image: linear-gradient(to bottom, #2c3e50, #34495e);
   margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 20px;
 }
 
-.add-friend #friend h2 {
-  margin-left: 90px;
-  margin-top: 15px;
+.header h1, h2 {
+  color: #ecf0f1;
 }
 
-#field {
-  color: grey;
+.footer {
+  position: relative;
+  background: #34495e;
+  background-image: -webkit-linear-gradient(top, #34495e, #2c3e50);
+  background-image: -moz-linear-gradient(top, #34495e, #2c3e50);
+  background-image: -ms-linear-gradient(top, #34495e, #2c3e50);
+  background-image: -o-linear-gradient(top, #34495e, #2c3e50);
+  background-image: linear-gradient(to bottom, #34495e, #2c3e50);
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-right: 20px;
+  text-align: right;
 }
 
-#selected {
-  color: grey;
+a {
+  text-decoration: none;
+  color: white;
 }
 
-#upload {
-  color: grey;
-}
-
-.about img {
-  margin: 0 auto;
-  margin-top: 15px;
-  width: 70px;
-  height: 70px;
-}
-
-.about #made-by {
-  color: grey;
-}
-
-.options {
-  border-top: 1px solid #ccc;
-  position: absolute;
-  top: 300px;
-  width: 300px;
-}
-
-.options li {
-  margin-bottom: 5px;
-}
-
-.options ul {
-  list-style: none;
-  margin-left: -35px;
-  margin-top: 8px;
-}
-
-.options .left {
+#left {
   float: left;
+  margin-left: 20px;
 }
 
-.options .right {
-  float: right;
+#right {
+  right: -200px;
+  margin-right: 20px;
+  position: relative;
 }
 
-.options img {
-  float: right;
+#button {
+  background-color: #c0392b;
+  margin-left: 25px;
+  padding: 10px;
+  margin-right: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  color: #ffffff;
+  background: #e74c3c;
+  padding: 10px 20px 10px 20px;
 }
 
-.videoSharing {
-  float: right;
+#button:hover {
+  background: #e74c3c;
+  background-image: -webkit-linear-gradient(top, #e74c3c, #c0392b);
+  background-image: -moz-linear-gradient(top, #e74c3c, #c0392b);
+  background-image: -ms-linear-gradient(top, #e74c3c, #c0392b);
+  background-image: -o-linear-gradient(top, #e74c3c, #c0392b);
+  background-image: linear-gradient(to bottom, #e74c3c, #c0392b);
 }
 
-.settings img {
-  float: right;
+input {
+  background-color: #c0392b;
+  margin-left: 20px;
+  margin-right: 25px;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 20px;
+  background: #e74c3c;
+  box-sizing: border-box;
+  border: none;
+}
+
+#insidetext {
+  margin-left: 20px;
+  color: #ecf0f1;
+}
+
+#pausebutton {
+  margin-left: 20px;
   width: 75px;
-  height: 75px;
+}
+
+#sharebutton {
+  width: 75px;
+}
+
+#quitbutton {
+  margin-right: 20px;
+  width: 75px;
+}
+
+#yourname {
+  margin-left: 20px;
 }
