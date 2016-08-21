@@ -1,3 +1,8 @@
+chrome.runtime.sendMessage({
+  from: 'content',
+  subject: 'joinRoom',
+});
+
 function Config(host) {
   const self = this;
 
@@ -6,7 +11,13 @@ function Config(host) {
 
   this.room = '';
 
-  this.joinRoom = newRoom => {
+  this.toggleSync = (cb) => {
+    chrome.storage.sync.set({ paused: !self.syncPaused }, () => {
+      self.syncPaused = !self.syncPaused;
+      cb(self.syncPaused);
+    });
+  };
+  this.joinRoom = (newRoom, joinedCb) => {
     const normalisedNewRoom = newRoom.trim().toLowerCase();
     console.log('attempting to join: ', normalisedNewRoom);
 
@@ -21,6 +32,7 @@ function Config(host) {
 
       self.room = normalisedNewRoom;
       self.client.document(self.room).then(doc => {
+        if (joinedCb) joinedCb(self.room);
         console.log('then doc cb');
         doc.mutate(data => {
           console.log('mutateCb');
@@ -88,3 +100,15 @@ function changeTime(time) {
   console.log(time);
   if (!config.syncPaused) $('video')[0].currentTime = time || 0;
 }
+
+chrome.runtime.onMessage.addListener((msg, sender, res) => {
+  if (msg.from === 'popup') {
+    switch (msg.subject) {
+      case 'joinRoom': config.joinRoom(msg.room, res); break;
+      case 'toggleSync': config.toggleSync(res); break;
+      case 'getStatus': res({ room: config.room, syncPaused: config.syncPaused }); break;
+      default: console.error('Err: No action');
+    }
+  }
+});
+
