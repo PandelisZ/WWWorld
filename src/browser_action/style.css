@@ -69,7 +69,7 @@ a {
   position: relative;
 }
 
-#button {
+.button {
   background-color: #c0392b;
   margin-left: 25px;
   padding: 10px;
