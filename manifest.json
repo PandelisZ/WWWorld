@@ -25,7 +25,8 @@
   "permissions": [
     "https://*/*",
     "http://*/*",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "content_scripts": [
     {
