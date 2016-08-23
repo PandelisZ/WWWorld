@@ -58,32 +58,7 @@ a {
   color: white;
 }
 
-.button {
-  background-color: #c0392b;
-  margin-left: 25px;
-  padding: 10px;
-  margin-right: 25px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  -webkit-border-radius: 4;
-  -moz-border-radius: 4;
-  border-radius: 4px;
-  color: #ffffff;
-  background: #e74c3c;
-  padding: 10px 20px 10px 20px;
-}
-
-.button:hover {
-  background: #e74c3c;
-  background-image: -webkit-linear-gradient(top, #e74c3c, #c0392b);
-  background-image: -moz-linear-gradient(top, #e74c3c, #c0392b);
-  background-image: -ms-linear-gradient(top, #e74c3c, #c0392b);
-  background-image: -o-linear-gradient(top, #e74c3c, #c0392b);
-  background-image: linear-gradient(to bottom, #e74c3c, #c0392b);
-}
-
-input {
+.clean {
   background-color: #c0392b;
   margin-left: 20px;
   margin-right: 25px;
@@ -99,4 +74,63 @@ input {
   background: #e74c3c;
   box-sizing: border-box;
   border: none;
+}
+
+.dirty {
+  background-color: #95a5a6;
+  margin-left: 20px;
+  margin-right: 25px;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 20px;
+  background: #7f8c8d;
+  box-sizing: border-box;
+  border: none;
+}
+
+.greyed {
+  background-color: #95a5a6;
+  margin-left: 25px;
+  padding: 10px;
+  margin-right: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  color: #ffffff;
+  background: #7f8c8d;
+  padding: 10px 20px 10px 20px;
+}
+
+.active {
+  background-color: #c0392b;
+  margin-left: 25px;
+  padding: 10px;
+  margin-right: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  color: #ffffff;
+  background: #e74c3c;
+  padding: 10px 20px 10px 20px;
+}
+
+.active:hover {
+  background: #e74c3c;
+  background-image: -webkit-linear-gradient(top, #e74c3c, #c0392b);
+  background-image: -moz-linear-gradient(top, #e74c3c, #c0392b);
+  background-image: -ms-linear-gradient(top, #e74c3c, #c0392b);
+  background-image: -o-linear-gradient(top, #e74c3c, #c0392b);
+  background-image: linear-gradient(to bottom, #e74c3c, #c0392b);
 }

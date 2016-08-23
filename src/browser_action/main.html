@@ -5,17 +5,18 @@
   <title>Home - YouTubeSync</title>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="popup.js" type="text/javascript"></script>
 </head>
 <body>
   <div class="window">
     <div class="header">
       <h1>YouTubeSync</h1>
     </div>
-    <form action="action_page.php">
-      <input type="text" name="roomname" value="Room Name">
+    <form name=action="action_page.php">
+      <input type="text" id="roomField" name="roomname" value="Room Name">
     </form>
-    <a href=""><h2 class="button">Join</h2></a>
-    <a href="paused.html"><h2 class="button">Start Sync</h2></a>
+    <a href=""><h2 id="joinRoom">Join</h2></a>
+    <a href="paused.html"><h2 id="toggleSync">Start Sync</h2></a>
     <div class="footer">
       <h3>WWWorld</h3>
     </div>
