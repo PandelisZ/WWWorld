@@ -58,17 +58,6 @@ a {
   color: white;
 }
 
-#left {
-  float: left;
-  margin-left: 20px;
-}
-
-#right {
-  right: -200px;
-  margin-right: 20px;
-  position: relative;
-}
-
 .button {
   background-color: #c0392b;
   margin-left: 25px;
@@ -85,7 +74,7 @@ a {
   padding: 10px 20px 10px 20px;
 }
 
-#button:hover {
+.button:hover {
   background: #e74c3c;
   background-image: -webkit-linear-gradient(top, #e74c3c, #c0392b);
   background-image: -moz-linear-gradient(top, #e74c3c, #c0392b);
@@ -110,27 +99,4 @@ input {
   background: #e74c3c;
   box-sizing: border-box;
   border: none;
-}
-
-#insidetext {
-  margin-left: 20px;
-  color: #ecf0f1;
-}
-
-#pausebutton {
-  margin-left: 20px;
-  width: 75px;
-}
-
-#sharebutton {
-  width: 75px;
-}
-
-#quitbutton {
-  margin-right: 20px;
-  width: 75px;
-}
-
-#yourname {
-  margin-left: 20px;
 }
