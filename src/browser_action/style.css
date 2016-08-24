@@ -58,7 +58,7 @@ a {
   color: white;
 }
 
-input {
+#roomField {
   background-color: #c0392b;
   margin-left: 20px;
   margin-right: 25px;
