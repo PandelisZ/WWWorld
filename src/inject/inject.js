@@ -1,6 +1,7 @@
 chrome.runtime.sendMessage({
   from: 'content',
   subject: 'joinRoom',
+  room: 'room',
 });
 
 function Config(host) {
@@ -32,6 +33,7 @@ function Config(host) {
 
       self.room = normalisedNewRoom;
       self.client.document(self.room).then(doc => {
+        console.log('joinedCb~', joinedCb);
         if (joinedCb) joinedCb(self.room);
         console.log('then doc cb');
         doc.mutate(data => {
@@ -101,12 +103,15 @@ function changeTime(time) {
   if (!config.syncPaused) $('video')[0].currentTime = time || 0;
 }
 
+console.log('test');
 chrome.runtime.onMessage.addListener((msg, sender, res) => {
+  console.log(msg);
   if (msg.from === 'popup') {
+    console.log('popup: ', msg.subject);
     switch (msg.subject) {
       case 'joinRoom': config.joinRoom(msg.room, res); break;
       case 'toggleSync': config.toggleSync(res); break;
-      case 'getStatus': res({ room: config.room, syncPaused: config.syncPaused }); break;
+      case 'getState': res({ room: config.room, syncPaused: config.syncPaused }); break;
       default: console.error('Err: No action');
     }
   }
