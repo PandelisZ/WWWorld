@@ -76,6 +76,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // room
     elements.roomField.value = state.room;
     lastRoom = state.room;
+    assignInputStates();
     elements.roomField.addEventListener('input', assignInputStates);
   });
 
@@ -84,8 +85,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if (elements.joinRoomBtn.className === 'active') {
       console.log('joinRoomBtn.value: ', elements.roomField.value);
       console.log('typeof: ', typeof elements.roomField.value);
-      const room = { room: elements.roomField.value };
-      const msg = { from: 'popup', subject: 'joinRoom', room: room.room };
+      const room = elements.roomField.value;
+      const msg = { from: 'popup', subject: 'joinRoom', room };
       console.log(JSON.stringify(msg));
       sendMsg(
           msg,
