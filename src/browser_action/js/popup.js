@@ -29,7 +29,7 @@ function sendMsg(msg, cb) {
           tabs => {
         chrome.tabs.sendMessage(
             tabs[0].id,
-            { from: 'popup', subject: 'joinRoom', room: 'testing123' },
+            msg,
             res => cb(res)
         );
       });
@@ -76,14 +76,20 @@ window.addEventListener('DOMContentLoaded', () => {
     // room
     elements.roomField.value = state.room;
     lastRoom = state.room;
+    assignInputStates();
     elements.roomField.addEventListener('input', assignInputStates);
   });
 
   // joinRoom
   elements.joinRoomBtn.addEventListener('click', () => {
     if (elements.joinRoomBtn.className === 'active') {
+      console.log('joinRoomBtn.value: ', elements.roomField.value);
+      console.log('typeof: ', typeof elements.roomField.value);
+      const room = elements.roomField.value;
+      const msg = { from: 'popup', subject: 'joinRoom', room };
+      console.log(JSON.stringify(msg));
       sendMsg(
-          { from: 'popup', subject: 'joinRoom', room: elements.joinRoomBtn.value },
+          msg,
           room => {
             lastRoom = room;
             assignInputStates();
