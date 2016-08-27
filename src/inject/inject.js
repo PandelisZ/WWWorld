@@ -98,9 +98,13 @@ function fetchAccessToken(cb) {
   $.getJSON(config.host + '/token', { device: 'browser' }, cb);
 }
 
+const MIN_LATENCY = 0.3;
 function changeTime(time) {
   console.log(time);
-  if (!config.syncPaused) $('video')[0].currentTime = time || 0;
+  if (!config.syncPaused) {
+    const video = $('video')[0];
+    video.currentTime = time + MIN_LATENCY || 0;
+  }
 }
 
 console.log('test');
