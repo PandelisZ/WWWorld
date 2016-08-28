@@ -92,7 +92,7 @@ const config = new Config('//twilio.mattburman.com');
 const readyStateCheckInterval = setInterval(() => {
   if (document.readyState === 'complete') {
     clearInterval(readyStateCheckInterval);
-    ytVideo = $('video')[0];
+
 
     $('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js\'>');
     $('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/sync/v0.2/twilio-sync.min.js\'>');
@@ -102,21 +102,27 @@ const readyStateCheckInterval = setInterval(() => {
       config.client = new Twilio.Sync.Client(new Twilio.AccessManager(authData.token));
       console.log('You are: ' + config.client.accessManager.identity);
 
-      chrome.storage.onChanged.addListener((changes, namespace) => {
-        const roomChanges = changes.room;
-        if (roomChanges) {
-          console.log(roomChanges.oldValue + ' => ' + roomChanges.newValue);
-          config.joinRoom(roomChanges.newValue);
+      const getVideo = setInterval(() => {
+        ytVideo = $('video')[0];
+        if (ytVideo) {
+          clearInterval(getVideo);
+          chrome.storage.onChanged.addListener((changes, namespace) => {
+            const roomChanges = changes.room;
+            if (roomChanges) {
+              console.log(roomChanges.oldValue + ' => ' + roomChanges.newValue);
+              config.joinRoom(roomChanges.newValue);
+            }
+
+            const pausedChanges = changes.paused;
+            if (pausedChanges) config.syncPaused = pausedChanges.newValue;
+          });
+
+          chrome.storage.sync.get('room', data => {
+            console.log(data);
+            config.joinRoom(data.room);
+          });
         }
-
-        const pausedChanges = changes.paused;
-        if (pausedChanges) config.syncPaused = pausedChanges.newValue;
-      });
-
-      chrome.storage.sync.get('room', data => {
-        console.log(data);
-        config.joinRoom(data.room);
-      });
+      }, 100);
     });
 
     // Button Controlls
