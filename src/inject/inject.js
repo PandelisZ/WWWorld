@@ -35,7 +35,7 @@ function Config(host) {
   /* rooms */
   this.room = '';
   this.joinRoom = (newRoom, joinedCb) => {
-    const normalisedNewRoom = (newRoom || 'default').trim().toLowerCase();
+    const normalisedNewRoom = (newRoom || 'default').trim().replace(' ', '-').toLowerCase();
     console.log('attempting to join: ', normalisedNewRoom);
 
     // defend against subscribing to the same room twice
