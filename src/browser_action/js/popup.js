@@ -19,6 +19,7 @@
  ‘active’ when the input field value has changed since the last join
  */
 
+let lastRoom = '';
 
 function sendMsg(msg, cb) {
   chrome.tabs.query(
@@ -26,7 +27,7 @@ function sendMsg(msg, cb) {
         active: true,
         currentWindow: true,
       },
-          tabs => {
+      tabs => {
         chrome.tabs.sendMessage(
             tabs[0].id,
             msg,
@@ -42,9 +43,10 @@ window.addEventListener('DOMContentLoaded', () => {
     roomField: document.getElementById('roomField'),
     joinRoomBtn: document.getElementById('joinRoom'),
   };
-  let lastRoom = '';
 
   function assignInputStates() {
+    console.log('elements.roomField.value: ', elements.roomField.value);
+    console.log('lastRoom: ', lastRoom);
     if (elements.roomField.value === lastRoom) {
       elements.roomField.className = 'clean';
       elements.joinRoomBtn.className = 'greyed';
@@ -57,19 +59,24 @@ window.addEventListener('DOMContentLoaded', () => {
   // get state, apply things based on state incl. event listeners.
   sendMsg({ from: 'popup', subject: 'getState' }, state => {
     // state = { room, syncPaused
+    console.log('state: ', state);
 
     // toggleSyncBtn
-    if (state.syncPaused) elements.toggleSyncBtn.className = 'unsynced';
-    else elements.toggleSyncBtn.className = 'synced';
     function setSyncButtonState(syncPaused) {
-      if (syncPaused) elements.toggleSyncBtn.className = 'unsynced';
-      else elements.toggleSyncBtn.className = 'synced';
+      if (syncPaused) {
+        elements.toggleSyncBtn.className = 'unsynced';
+        elements.toggleSyncBtn.innerText = 'Start Sync';
+      } else {
+        elements.toggleSyncBtn.className = 'synced';
+        elements.toggleSyncBtn.innerText = 'Stop Sync';
+      }
     }
-    setSyncButtonState();
+    setSyncButtonState(state.syncPaused);
+
     elements.toggleSyncBtn.addEventListener('click', () => {
       sendMsg(
-          { from: 'popup', subject: 'toggleState', room: elements.toggleSyncBtn.value },
-          newValue => setSyncButtonState(newValue)
+          { from: 'popup', subject: 'toggleSync', room: elements.toggleSyncBtn.value },
+          setSyncButtonState
       );
     });
 
@@ -83,14 +90,12 @@ window.addEventListener('DOMContentLoaded', () => {
   // joinRoom
   elements.joinRoomBtn.addEventListener('click', () => {
     if (elements.joinRoomBtn.className === 'active') {
-      console.log('joinRoomBtn.value: ', elements.roomField.value);
-      console.log('typeof: ', typeof elements.roomField.value);
       const room = elements.roomField.value;
       const msg = { from: 'popup', subject: 'joinRoom', room };
-      console.log(JSON.stringify(msg));
       sendMsg(
           msg,
           room => {
+            console.log('room: ', room);
             lastRoom = room;
             assignInputStates();
           }

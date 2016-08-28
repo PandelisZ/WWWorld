@@ -1,3 +1,5 @@
+let ytVideo;
+
 chrome.runtime.sendMessage({
   from: 'content',
   subject: 'joinRoom',
@@ -7,19 +9,33 @@ chrome.runtime.sendMessage({
 function Config(host) {
   const self = this;
 
-  this.host = host || '';
-  this.syncPaused = false;
+  this.host = host || console.error('Provide a host.');
 
-  this.room = '';
-
-  this.toggleSync = (cb) => {
-    chrome.storage.sync.set({ paused: !self.syncPaused }, () => {
-      self.syncPaused = !self.syncPaused;
-      cb(self.syncPaused);
+  /* syncPaused */
+  this.syncPaused = undefined;
+  chrome.storage.sync.get('paused', obj => {
+    self.syncPaused = obj.paused;
+  });
+  this.setSyncPaused = (val, cb) => chrome.storage.sync.set({ paused: val }, cb);
+  this.getSyncPaused = cb => {
+    chrome.storage.sync.get('paused', obj => {
+      cb(obj.paused);
     });
   };
+  this.getSyncPaused(paused => {
+    if (paused === undefined) self.setSyncPaused(true);
+  });
+  this.toggleSync = cb => {
+    const newVal = !self.syncPaused;
+    self.setSyncPaused(newVal, () => {
+      cb(newVal);
+    });
+  };
+
+  /* rooms */
+  this.room = '';
   this.joinRoom = (newRoom, joinedCb) => {
-    const normalisedNewRoom = newRoom.trim().toLowerCase();
+    const normalisedNewRoom = (newRoom || 'default').trim().toLowerCase();
     console.log('attempting to join: ', normalisedNewRoom);
 
     // defend against subscribing to the same room twice
@@ -33,28 +49,37 @@ function Config(host) {
 
       self.room = normalisedNewRoom;
       self.client.document(self.room).then(doc => {
-        console.log('joinedCb~', joinedCb);
         if (joinedCb) joinedCb(self.room);
-        console.log('then doc cb');
-        doc.mutate(data => {
-          console.log('mutateCb');
-          changeTime(data.time);
-          return data;
-        });
+
+        /*
+        if (!self.syncPaused) {
+          doc.mutate(data => {
+            console.log('mutateCb');
+            changeTime(data.time);
+          }).then(data => {
+            console.log('mutateCb then');
+            changeTime(data.time);
+          }
+          ).catch(err => console.log(err));
+        }*/
 
         doc.on('updated', data => {
           console.log('remote updated');
           changeTime(data.time);
         });
+      }).catch(err => {
+        console.log('documentErr', err);
       });
 
-      $('video')[0].onplay = () => {
+      ytVideo.onplay = () => {
         config.client.document(self.room).then(doc => {
-          doc.mutate(data => {
-            console.log('onplay mutate cb');
-            data.time = $('video')[0].currentTime;
-            return data;
-          });
+          if (!self.syncPaused) {
+            doc.mutate(data => {
+              console.log('onplay mutate cb');
+              data.time = ytVideo.currentTime;
+              return data;
+            });
+          }
         }).catch(err => {
           console.log('onPlayERR: ', err);
         });
@@ -67,9 +92,10 @@ const config = new Config('//twilio.mattburman.com');
 const readyStateCheckInterval = setInterval(() => {
   if (document.readyState === 'complete') {
     clearInterval(readyStateCheckInterval);
+    ytVideo = $('video')[0];
 
-    $('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js\'>');
-    $('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/sync/v0.2/twilio-sync.min.js\'>');
+    //$('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js\'>');
+    //$('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/sync/v0.2/twilio-sync.min.js\'>');
     $('head').append('<style>.wwwatch-buttons{background-color:white; width: 100%; height: 80px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.1);}</style>');
 
     fetchAccessToken(authData => {
@@ -78,8 +104,13 @@ const readyStateCheckInterval = setInterval(() => {
 
       chrome.storage.onChanged.addListener((changes, namespace) => {
         const roomChanges = changes.room;
-        console.log(roomChanges.oldValue + ' => ' + roomChanges.newValue);
-        config.joinRoom(roomChanges.newValue);
+        if (roomChanges) {
+          console.log(roomChanges.oldValue + ' => ' + roomChanges.newValue);
+          config.joinRoom(roomChanges.newValue);
+        }
+
+        const pausedChanges = changes.paused;
+        if (pausedChanges) config.syncPaused = pausedChanges.newValue;
       });
 
       chrome.storage.sync.get('room', data => {
@@ -102,22 +133,29 @@ const MIN_LATENCY = 0.3;
 function changeTime(time) {
   console.log(time);
   if (!config.syncPaused) {
-    const video = $('video')[0];
-    video.currentTime = time + MIN_LATENCY || 0;
+    ytVideo.currentTime = time + MIN_LATENCY || 0;
   }
 }
 
-console.log('test');
 chrome.runtime.onMessage.addListener((msg, sender, res) => {
   console.log(msg);
   if (msg.from === 'popup') {
     console.log('popup: ', msg.subject);
     switch (msg.subject) {
-      case 'joinRoom': config.joinRoom(msg.room, res); break;
-      case 'toggleSync': config.toggleSync(res); break;
-      case 'getState': res({ room: config.room, syncPaused: config.syncPaused }); break;
+      case 'joinRoom':
+        config.joinRoom(msg.room, res);
+        return true;
+        break;
+      case 'toggleSync':
+        config.toggleSync(res);
+        return true;
+        break;
+      case 'getState':
+        res({ room: config.room, syncPaused: config.syncPaused });
+        break;
       default: console.error('Err: No action');
     }
+    return false;
   }
 });
 
