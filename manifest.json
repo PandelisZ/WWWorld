@@ -2,7 +2,7 @@
   "name": "WWWorld",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Watch and rect to videos live with anyone in the world!",
+  "description": "Watch YouTube videos in sync with anyone in the world!",
   "homepage_url": "http://extensionizr.com",
   "icons": {
     "16": "icons/icon16.png",

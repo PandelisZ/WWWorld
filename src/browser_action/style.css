@@ -63,6 +63,7 @@ button {
   font-size: 20px;
   border: none;
   background: #e74c3c;
+  cursor: pointer;
 }
 
 .clean, .active {
