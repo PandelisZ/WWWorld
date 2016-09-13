@@ -125,9 +125,9 @@ const readyStateCheckInterval = setInterval(() => {
       }, 100);
     });
 
-    // Button Controlls
-    $('.watch-main-col').prepend('<div class=\'wwwatch-buttons\'><h1>Test</h1></div>');
-    $('.watch-sidebar').prepend('<div class=\'wwwatch-buttons\'><h1>Test</h1></div>');
+    // // Button Controlls
+    // $('.watch-main-col').prepend('<div class=\'wwwatch-buttons\'><h1>Test</h1></div>');
+    // $('.watch-sidebar').prepend('<div class=\'wwwatch-buttons\'><h1>Test</h1></div>');
   }
 }, 10);
 
@@ -164,4 +164,3 @@ chrome.runtime.onMessage.addListener((msg, sender, res) => {
     return false;
   }
 });
-
