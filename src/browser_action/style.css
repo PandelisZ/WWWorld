@@ -1,41 +1,41 @@
 html {
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
+  font-weight: lighter;
+  top: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font-weight: lighter;
 }
 
 h1, input, button {
-  color: #ecf0f1;
+  color: black;
 }
 
 h1 {
   font-size: 20px;
+  font-weight: lighter;
 }
 
 .window {
-  background-color: #2c3e50;
+  background-color: white;
   margin: 0px;
   width: 280px;
 }
 
 .header {
-  background: #2c3e50;
-  background-image: -webkit-linear-gradient(top, #2c3e50, #34495e);
-  background-image: -moz-linear-gradient(top, #2c3e50, #34495e);
-  background-image: -ms-linear-gradient(top, #2c3e50, #34495e);
-  background-image: -o-linear-gradient(top, #2c3e50, #34495e);
-  background-image: linear-gradient(to bottom, #2c3e50, #34495e);
+  background: white;
   padding: 1px;
   padding-left: 20px;
 }
 
 .footer {
   position: relative;
-  background: #34495e;
-  background-image: -webkit-linear-gradient(top, #34495e, #2c3e50);
-  background-image: -moz-linear-gradient(top, #34495e, #2c3e50);
-  background-image: -ms-linear-gradient(top, #34495e, #2c3e50);
-  background-image: -o-linear-gradient(top, #34495e, #2c3e50);
-  background-image: linear-gradient(to bottom, #34495e, #2c3e50);
+  background: white;
   padding: 1px;
   padding-right: 20px;
   text-align: right;
@@ -48,9 +48,11 @@ input {
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 20px;
+  font-weight: lighter;
   border: none;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 button {
@@ -59,28 +61,25 @@ button {
   margin-left: 20px;
   margin-bottom: 20px;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 20px;
   border: none;
-  background: #e74c3c;
+  background: #ffd458;
+  font-weight: lighter;
   cursor: pointer;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .clean, .active {
-  background-color: #c0392b;
-  background: #e74c3c;
+  background-color: #ffd458;
+  background: #ffd458;
 }
 
 .dirty, .greyed {
-  background-color: #95a5a6;
-  background: #7f8c8d;
+  background-color: #ffd458;
+  background: #ffd458;
 }
 
 .active:hover, #toggleSync:hover {
-  background: #e74c3c;
-  background-image: -webkit-linear-gradient(top, #e74c3c, #c0392b);
-  background-image: -moz-linear-gradient(top, #e74c3c, #c0392b);
-  background-image: -ms-linear-gradient(top, #e74c3c, #c0392b);
-  background-image: -o-linear-gradient(top, #e74c3c, #c0392b);
-  background-image: linear-gradient(to bottom, #e74c3c, #c0392b);
+  background: #ffe8a4;
 }
