@@ -16,7 +16,10 @@ function Config(host) {
   chrome.storage.sync.get('paused', obj => {
     self.syncPaused = obj.paused;
   });
-  this.setSyncPaused = (val, cb) => chrome.storage.sync.set({ paused: val }, cb);
+  this.setSyncPaused = (val, cb) => {
+		self.syncPaused = val;
+		chrome.storage.sync.set({ paused: val }, cb);
+	};
   this.getSyncPaused = cb => {
     chrome.storage.sync.get('paused', obj => {
       cb(obj.paused);
@@ -87,16 +90,11 @@ function Config(host) {
     });
   };
 }
-const config = new Config('//twilio.mattburman.com');
+var config = new Config('//twilio.mattburman.com');
 
-const readyStateCheckInterval = setInterval(() => {
+var readyStateCheckInterval = setInterval(() => {
   if (document.readyState === 'complete') {
     clearInterval(readyStateCheckInterval);
-
-
-    $('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js\'>');
-    $('head').append('<script type=\'text/javascript\' src=\'https://media.twiliocdn.com/sdk/js/sync/v0.2/twilio-sync.min.js\'>');
-    $('head').append('<style>.wwwatch-buttons{background-color:white; width: 100%; height: 80px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.1);}</style>');
 
     fetchAccessToken(authData => {
       config.client = new Twilio.Sync.Client(new Twilio.AccessManager(authData.token));
