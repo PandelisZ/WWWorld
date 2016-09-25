@@ -76,8 +76,8 @@ button {
 }
 
 .dirty, .greyed {
-  background-color: #ffd458;
-  background: #ffd458;
+  background-color: #95a5a6;
+  background: #95a5a6;
 }
 
 .active:hover, #toggleSync:hover {
