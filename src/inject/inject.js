@@ -1,4 +1,4 @@
-let ytVideo;
+var ytVideo;
 
 chrome.runtime.sendMessage({
   from: 'content',
