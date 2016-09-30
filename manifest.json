@@ -1,6 +1,6 @@
 {
   "name": "SyncVid.io",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest_version": 2,
   "description": "Watch YouTube videos in sync with anyone in the world!",
   "homepage_url": "http://syncvid.io",
@@ -16,10 +16,9 @@
     ],
     "persistent": true
   },
-  "options_page": "src/options_custom/index.html",
   "browser_action": {
     "default_icon": "icons/icon19.png",
-    "default_title": "browser action demo",
+    "default_title": "SyncVid.io",
     "default_popup": "src/browser_action/main.html"
   },
   "permissions": [
